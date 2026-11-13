@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6e7df">
+  <title>A Little Talk? — Salam Hangat dari Shofiyaa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topline">♡ A LITTLE HEART CORNER · INSTRUMENTAL AMBIENCE</div>
+
+  <div class="decor decor-left">🌸</div>
+  <div class="decor decor-right">✿</div>
+  <div class="decor decor-bottom">🌷</div>
+
+  <main class="page">
+    <header class="hero">
+      <div class="hero-emoji" aria-hidden="true">🥰 💌 ❤️ ✨</div>
+      <p class="greeting">Haiii, salam hangat dari Shofiyaa! ♡</p>
+      <h1>A little talk?</h1>
+      <p class="intro">
+        Bagaimana kabarmu akhir-akhir ini? Semoga hari-harimu menyenangkan,
+        yaa. Untuk sekarang, boleh kita ajak kamu berbicara sebentar tentang isi
+        hatimu? Tenang, ini ruang kecil yang hangat. Kamu boleh cerita dengan jujur,
+        tanpa takut dihakimi.
+      </p>
+      <div class="flower-line">🌷 ˚ ♡ ˚ ✿</div>
+    </header>
+
+    <section id="welcomeCard" class="card welcome-card">
+      <div class="envelope">💌</div>
+      <h2>Kenalan dulu, yuk!</h2>
+      <p class="muted">Nama kamu siapa? Biar Shofiyaa bisa menyapamu dengan lebih akrab.</p>
+      <form id="nameForm">
+        <label class="sr-only" for="visitorName">Nama kamu</label>
+        <input id="visitorName" maxlength="35" autocomplete="given-name" placeholder="Tulis namamu di sini..." required>
+        <button class="primary" type="submit">Lanjut, yuk! ♡</button>
+      </form>
+      <p class="tiny disclaimer">Jawabanmu hanya dipakai untuk menampilkan hasil di halaman ini. Ini refleksi ringan, bukan tes psikologi atau diagnosis.</p>
+    </section>
+
+    <section id="questionCard" class="card question-card hidden" aria-live="polite">
+      <div class="progress-meta">
+        <span id="questionNumber">PERTANYAAN 1 DARI 10</span>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+      <h2 id="questionTitle"></h2>
+      <div id="answerList" class="answers"></div>
+      <div class="button-row">
+        <button id="prevButton" class="soft hidden" type="button">← Sebelumnya</button>
+        <button id="nextButton" class="primary next" type="button" disabled>Berikutnya →</button>
+      </div>
+    </section>
+
+    <section id="resultCard" class="card result-card hidden" aria-live="polite">
+      <div class="result-emoji">🥰 💌 ❤️ ✨</div>
+      <h2 id="resultHeading">Oke, kamu... 🤎</h2>
+      <p id="resultIntro" class="muted result-intro"></p>
+
+      <div id="scores" class="scores"></div>
+      <div class="reflection" id="reflectionText"></div>
+      <p class="closing" id="closingText"></p>
+      <div class="heart">🤎</div>
+      <div class="flower-line">🌸 🌷 🧸 💗</div>
+      <h3>Oke, sekarang spill dong hasil kamu ke Shofiyaa! ♡</h3>
+      <p class="tiny muted">Kalau kamu nyaman, kirim hasil refleksimu lewat WhatsApp. Kamu bisa pilih kontak Shofiyaa setelah tombol ditekan.</p>
+      <div class="result-actions">
+        <button id="whatsappButton" class="primary" type="button">Kirim ke Shofiyaa via WhatsApp ♡</button>
+        <button id="restartButton" class="soft" type="button">Isi ulang</button>
+      </div>
+      <p class="tiny blessing">Barakallahufikum! Semoga Allah selalu menjaga langkahmu. Love love dari Shofiyaa ♡</p>
+    </section>
+
+    <footer>dibuat dengan hangat oleh Shofiyaa · take your time ♡</footer>
+  </main>
+
+  <button id="musicButton" class="music-button" type="button" aria-label="Putar atau jeda musik">♫ Musik</button>
+  <audio id="backgroundMusic" loop preload="none">
+    <source src="assets/music/background.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
