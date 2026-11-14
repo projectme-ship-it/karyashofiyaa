@@ -377,18 +377,35 @@ audio.addEventListener("ended", () => {
     }
 });
 
-// Progress lagu
+// Memuat durasi lagu
+audio.addEventListener("loadedmetadata", () => {
+    if (Number.isFinite(audio.duration)) {
+        duration.textContent = formatTime(audio.duration);
+    }
+});
+
+// Menggerakkan garis durasi
 audio.addEventListener("timeupdate", () => {
-    if (!audio.duration) return;
+    if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
 
-    progress.value =
-        (audio.currentTime / audio.duration) * 100;
+    const percentage = (audio.currentTime / audio.duration) * 100;
 
-    currentTime.textContent =
-        formatTime(audio.currentTime);
+    progress.value = percentage;
+    currentTime.textContent = formatTime(audio.currentTime);
+});
 
-    duration.textContent =
-        formatTime(audio.duration);
+// Mengatur posisi lagu melalui garis durasi
+progress.addEventListener("input", () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        audio.currentTime = (progress.value / 100) * audio.duration;
+    }
+});
+
+// Mengatur ulang durasi ketika lagu berganti
+audio.addEventListener("emptied", () => {
+    progress.value = 0;
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
 });
 
 // Mengatur posisi lagu
