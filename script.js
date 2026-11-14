@@ -393,12 +393,35 @@ audio.addEventListener("timeupdate", () => {
     progress.value = percentage;
     currentTime.textContent = formatTime(audio.currentTime);
 });
+// ===== PENGATUR DURASI MUSIK =====
 
-// Mengatur posisi lagu melalui garis durasi
+progress.max = 100;
+progress.value = 0;
+
+audio.addEventListener("loadedmetadata", () => {
+    if (Number.isFinite(audio.duration)) {
+        duration.textContent = formatTime(audio.duration);
+    }
+});
+
+audio.addEventListener("timeupdate", () => {
+    if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
+
+    progress.value = (audio.currentTime / audio.duration) * 100;
+
+    currentTime.textContent = formatTime(audio.currentTime);
+});
+
 progress.addEventListener("input", () => {
     if (Number.isFinite(audio.duration) && audio.duration > 0) {
         audio.currentTime = (progress.value / 100) * audio.duration;
     }
+});
+
+audio.addEventListener("emptied", () => {
+    progress.value = 0;
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
 });
 
 // Mengatur ulang durasi ketika lagu berganti
@@ -406,14 +429,6 @@ audio.addEventListener("emptied", () => {
     progress.value = 0;
     currentTime.textContent = "0:00";
     duration.textContent = "0:00";
-});
-
-// Mengatur posisi lagu
-progress.addEventListener("input", () => {
-    if (audio.duration) {
-        audio.currentTime =
-            (progress.value / 100) * audio.duration;
-    }
 });
 
 // Mengatur volume
