@@ -251,3 +251,197 @@ const songs = [
         cover: "🌸"
     }
 ];
+
+// ===== FUNGSI CUSTOM MUSIC PLAYER =====
+
+const audio = document.getElementById("audioPlayer");
+
+const playBtn = document.getElementById("playBtn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+const shuffleBtn = document.getElementById("shuffleBtn");
+const repeatBtn = document.getElementById("repeatBtn");
+
+const title = document.getElementById("musicTitle");
+const artist = document.getElementById("musicArtist");
+const cover = document.getElementById("musicCover");
+
+const progress = document.getElementById("progressBar");
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
+
+const volume = document.getElementById("volumeBar");
+
+const playlistItems = document.getElementById("playlistItems");
+const playlistToggle = document.getElementById("playlistToggle");
+const playlist = document.getElementById("musicPlaylist");
+
+let currentSong = 0;
+let isShuffle = false;
+let isRepeat = false;
+
+// Memuat lagu
+function loadSong(index) {
+    currentSong = index;
+
+    const song = songs[currentSong];
+
+    audio.src = song.src;
+    title.textContent = song.title;
+    artist.textContent = song.artist;
+    cover.textContent = song.cover;
+
+    renderPlaylist();
+}
+
+// Memutar lagu
+function playSong() {
+    audio.play()
+        .then(() => {
+            playBtn.textContent = "❚❚";
+        })
+        .catch(() => {
+            alert("Lagu gagal diputar. Periksa file MP3.");
+        });
+}
+
+// Menjeda lagu
+function pauseSong() {
+    audio.pause();
+    playBtn.textContent = "▶";
+}
+
+playBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        playSong();
+    } else {
+        pauseSong();
+    }
+});
+
+// Lagu berikutnya
+function nextSong() {
+    if (isShuffle && songs.length > 1) {
+        let next;
+
+        do {
+            next = Math.floor(Math.random() * songs.length);
+        } while (next === currentSong);
+
+        loadSong(next);
+    } else {
+        loadSong((currentSong + 1) % songs.length);
+    }
+
+    playSong();
+}
+
+// Lagu sebelumnya
+function previousSong() {
+    if (audio.currentTime > 3) {
+        audio.currentTime = 0;
+        return;
+    }
+
+    loadSong((currentSong - 1 + songs.length) % songs.length);
+    playSong();
+}
+
+nextBtn.addEventListener("click", nextSong);
+prevBtn.addEventListener("click", previousSong);
+
+// Shuffle
+shuffleBtn.addEventListener("click", () => {
+    isShuffle = !isShuffle;
+
+    shuffleBtn.style.color =
+        isShuffle ? "#d16d80" : "";
+});
+
+// Repeat
+repeatBtn.addEventListener("click", () => {
+    isRepeat = !isRepeat;
+
+    repeatBtn.style.color =
+        isRepeat ? "#d16d80" : "";
+});
+
+// Lagu selesai
+audio.addEventListener("ended", () => {
+    if (isRepeat) {
+        audio.currentTime = 0;
+        playSong();
+    } else {
+        nextSong();
+    }
+});
+
+// Progress lagu
+audio.addEventListener("timeupdate", () => {
+    if (!audio.duration) return;
+
+    progress.value =
+        (audio.currentTime / audio.duration) * 100;
+
+    currentTime.textContent =
+        formatTime(audio.currentTime);
+
+    duration.textContent =
+        formatTime(audio.duration);
+});
+
+// Mengatur posisi lagu
+progress.addEventListener("input", () => {
+    if (audio.duration) {
+        audio.currentTime =
+            (progress.value / 100) * audio.duration;
+    }
+});
+
+// Mengatur volume
+volume.addEventListener("input", () => {
+    audio.volume = volume.value;
+});
+
+// Format waktu
+function formatTime(seconds) {
+    const min = Math.floor(seconds / 60);
+    const sec = Math.floor(seconds % 60);
+
+    return `${min}:${sec.toString().padStart(2, "0")}`;
+}
+
+// Membuka playlist
+playlistToggle.addEventListener("click", () => {
+    playlist.classList.toggle("active");
+});
+
+// Menampilkan daftar lagu
+function renderPlaylist() {
+    playlistItems.innerHTML = "";
+
+    songs.forEach((song, index) => {
+        const item = document.createElement("div");
+
+        item.className = "playlist-item";
+
+        if (index === currentSong) {
+            item.classList.add("active");
+        }
+
+        item.textContent =
+            `${song.cover} ${song.title}`;
+
+        item.addEventListener("click", () => {
+            loadSong(index);
+            playSong();
+        });
+
+        playlistItems.appendChild(item);
+    });
+}
+
+// Inisialisasi
+audio.volume = 0.7;
+loadSong(0);
