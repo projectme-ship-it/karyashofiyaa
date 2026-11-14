@@ -488,18 +488,17 @@ function renderPlaylist() {
 
 // Inisialisasi player
 
-/* Animasi cover musik berputar */
-#musiCover.is-playing {
-    animation: cassetteSpin 3s linear infinite;
+/* Animasi cover musik */
+#musicCover.is-playing {
+    animation: putarCover 3s linear infinite !important;
     border-radius: 50%;
 }
 
-@keyframes cassetteSpin {
-    from {
+@keyframes putarCover {
+    0% {
         transform: rotate(0deg);
     }
-    to {
+    100% {
         transform: rotate(360deg);
     }
 }
-     
