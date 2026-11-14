@@ -304,22 +304,22 @@ button:not(:disabled):hover { transform: translateY(-2px); }
 
 const songs = [
     {
-        title: "Lagu Pertama",
-        artist: "Playlist Shofiyaa",
-        src: "assets/music/lagu1.mp3",
-        cover: "🎵"
-    },
-    {
-        title: "Lagu Kedua",
-        artist: "Playlist Shofiyaa",
-        src: "assets/music/lagu2.mp3",
+        title: "Arussatun Nur",
+        artist: "Muhammad Al Muqit",
+        src: "assets/music/Arussatun%20Nur.mp3",
         cover: "🌷"
     },
     {
-        title: "Lagu Ketiga",
-        artist: "Playlist Shofiyaa",
-        src: "assets/music/lagu3.mp3",
+        title: "Bi Saraha",
+        artist: "Abeer Nehme",
+        src: "assets/music/Bi%20Saraha.mp3",
         cover: "💗"
+    },
+    {
+        title: "Khoirud Duror",
+        artist: "Muhammad Al Muqit",
+        src: "assets/music/Khoirud%20Duror.mp3",
+        cover: "🌸"
     }
 ];
 
