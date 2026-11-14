@@ -46,6 +46,39 @@ let visitor = "";
 let current = 0;
 let answers = Array(questions.length).fill(null);
 
+// Efek klik dibuat langsung oleh browser (tanpa file audio tambahan).
+let clickAudioContext = null;
+function playClickSound(kind = "tap") {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    clickAudioContext ||= new AudioContextClass();
+    if (clickAudioContext.state === "suspended") clickAudioContext.resume();
+    const now = clickAudioContext.currentTime;
+    const oscillator = clickAudioContext.createOscillator();
+    const gain = clickAudioContext.createGain();
+    const isNext = kind === "next";
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(isNext ? 660 : 520, now);
+    oscillator.frequency.exponentialRampToValueAtTime(isNext ? 880 : 690, now + 0.075);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.055, now + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.13);
+    oscillator.connect(gain);
+    gain.connect(clickAudioContext.destination);
+    oscillator.start(now);
+    oscillator.stop(now + 0.14);
+  } catch (error) { /* Suara opsional; fungsi utama website tetap berjalan. */ }
+}
+
+// Suara halus untuk tombol statis; tombol jawaban ditangani saat dibuat.
+document.addEventListener("click", (event) => {
+  const button = event.target.closest("button");
+  if (!button || button.disabled || button.id === "musicButton") return;
+  const kind = button.id === "nextButton" ? "next" : "tap";
+  playClickSound(kind);
+});
+
 const welcomeCard = $("welcomeCard");
 const questionCard = $("questionCard");
 const resultCard = $("resultCard");

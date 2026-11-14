@@ -5,7 +5,7 @@ Website statis yang bisa dipublikasikan melalui GitHub Pages.
 ## Isi folder
 - `index.html` — struktur halaman
 - `style.css` — desain responsif
-- `script.js` — 10 pertanyaan, navigasi, hasil refleksi, dan WhatsApp
+- `script.js` — 10 pertanyaan, navigasi, hasil refleksi, WhatsApp, dan efek suara klik
 - `assets/music/background.mp3` — tempat menaruh musik latar (opsional)
 
 ## Menjalankan
@@ -22,3 +22,9 @@ Catatan:
 - Musik latar belum disertakan. Letakkan file MP3 milikmu di `assets/music/` dengan nama `background.mp3`.
 - Tombol WhatsApp menggunakan fitur berbagi WhatsApp (`wa.me/?text=`), sehingga pengguna dapat memilih kontak Shofiyaa sendiri.
 - Persentase hasil adalah ringkasan refleksi sederhana yang dibuat untuk versi rekonstruksi, bukan skor psikologis dan belum tentu sama dengan algoritma website asli.
+
+
+## Animasi dan suara klik
+- Animasi bunga/emoji melayang, transisi kartu, dan efek hover sudah aktif melalui `style.css`.
+- Efek suara klik dibuat menggunakan Web Audio API di `script.js`, jadi tidak memerlukan file audio tambahan. Suara mulai aktif setelah pengunjung berinteraksi dengan halaman.
+- Tombol musik latar tetap opsional dan memerlukan file `assets/music/background.mp3` jika ingin digunakan.

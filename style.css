@@ -107,3 +107,45 @@ footer { text-align: center; margin: 28px 0 0; font: 11px "Playfair Display", Ge
   .result-card { padding: 23px 17px; }
   .music-button { top: 8px; right: 8px; }
 }
+
+
+/* Animasi lembut dan dekorasi bergerak */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-13px) rotate(4deg); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes softGlow {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(201,155,162,0)); }
+  50% { filter: drop-shadow(0 5px 9px rgba(201,155,162,.28)); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(13px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%, 100% { opacity: .55; transform: scale(.92) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.12) rotate(12deg); }
+}
+.hero-emoji { animation: bob 3.4s ease-in-out infinite, softGlow 4s ease-in-out infinite; }
+.flower-line { animation: bob 4.2s ease-in-out infinite; }
+.decor-left { animation: floaty 6s ease-in-out infinite; }
+.decor-right { animation: floaty 7s ease-in-out infinite reverse; }
+.decor-bottom { animation: bob 5s ease-in-out infinite; }
+.decor-right::after { content: '✧'; position: absolute; margin: 26px 0 0 -8px; font-size: 12px; animation: shimmer 2.6s ease-in-out infinite; }
+.card { animation: fadeUp .65s ease both; }
+.question-card h2, .answers, .button-row { animation: fadeUp .38s ease both; }
+.answer { transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+.answer:hover { transform: translateY(-2px); box-shadow: 0 5px 13px rgba(112,82,66,.07); }
+.answer.selected { transform: translateX(3px); }
+button:not(:disabled):hover { transform: translateY(-2px); }
+.primary:hover { box-shadow: 0 7px 16px rgba(105,75,60,.2); }
+.progress-fill, .score-fill { transition: width .75s cubic-bezier(.2,.8,.2,1); }
+.result-emoji { animation: bob 3.5s ease-in-out infinite; }
+.music-button { z-index: 5; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
