@@ -230,3 +230,24 @@ $("musicButton").addEventListener("click", async () => {
     $("musicButton").textContent = "♫ Musik";
   }
 });
+
+const songs = [
+    {
+        title: "Arussatun Nur",
+        artist: "Muhammad Al Muqit",
+        src: "assets/music/Arussatun%20Nur.mp3",
+        cover: "🌷"
+    },
+    {
+        title: "Bi Saraha",
+        artist: "Abeer Nehme",
+        src: "assets/music/Bi%20Saraha.mp3",
+        cover: "💗"
+    },
+    {
+        title: "Khoirud Duror",
+        artist: "Muhammad Al Muqit",
+        src: "assets/music/Khoirud%20Duror.mp3",
+        cover: "🌸"
+    }
+];
