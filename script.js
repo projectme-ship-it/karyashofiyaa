@@ -477,3 +477,12 @@ function renderPlaylist() {
 // Inisialisasi
 audio.volume = 0.7;
 loadSong(0);
+// Animasi cover ketika musik diputar
+audio.addEventListener("play", () => {
+    cover.classList.add("is-playing");
+});
+
+// Berhenti berputar ketika musik dijeda
+audio.addEventListener("pause", () => {
+    cover.classList.remove("is-playing");
+});
